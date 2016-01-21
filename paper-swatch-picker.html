@@ -14,6 +14,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
 <link rel="import" href="../paper-behaviors/paper-inky-focus-behavior.html">
+<link rel="import" href="../paper-listbox/paper-listbox.html">
 <link rel="import" href="../paper-menu-button/paper-menu-button.html">
 
 <!--
@@ -58,14 +59,6 @@ Custom property | Description | Default
         outline: none;
       }
 
-      .dropdown-content {
-        /* No spacing between adjacent boxes */
-        font-size: 0;
-        overflow: hidden;
-        @apply(--layout-vertical);
-        @apply(--layout-wrap);
-      }
-
       .color {
         box-sizing: border-box;
         width: var(--paper-swatch-picker-color-size, 20px);
@@ -76,8 +69,9 @@ Custom property | Description | Default
         cursor: pointer;
       }
 
-      .color:hover {
+      .color:hover, .color:focus {
         transform: scale(1.3, 1.3);
+        outline: none;
       }
 
       paper-icon-button {
@@ -86,6 +80,15 @@ Custom property | Description | Default
         margin: 0;
         padding: 0;
         @apply(--paper-swatch-picker-icon);
+      }
+
+      paper-listbox {
+        padding: 0;
+        font-size: 0;
+        overflow: visible;
+        position: fixed;
+        @apply(--layout-vertical);
+        @apply(--layout-wrap);
       }
     </style>
 
@@ -96,11 +99,11 @@ Custom property | Description | Default
           class="dropdown-trigger" alt="color picker"
           noink>
       </paper-icon-button>
-      <div class="dropdown-content" on-tap="_onColorTap" id="container">
+      <paper-listbox class="dropdown-content" on-tap="_onColorTap" id="container">
         <template is="dom-repeat" items="{{colorList}}">
           <div class="color">{{item}}</div>
         </template>
-      </div>
+      </paper-listbox>
     </paper-menu-button>
 
   </template>
@@ -185,7 +188,9 @@ Custom property | Description | Default
         this.$.container.style.width = this.columnCount * sizeOfAColorDiv + 'px';
 
         // Note: we won't actually render these color boxes unless the menu is
-        // actuall tapped.
+        // actually tapped.
+        this._renderedColors = false;
+
       },
 
       open: function() {
