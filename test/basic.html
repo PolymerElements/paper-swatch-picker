@@ -21,7 +21,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
   <link rel="import" href="../paper-swatch-picker.html">
 </head>
 <body>
-  <style>
+  <style is="custom-style">
     paper-swatch-picker.custom {
       --paper-swatch-picker-color-size: 10px;
     }
@@ -41,7 +41,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
   <test-fixture id="custom">
     <template>
-      <paper-swatch-picker class="custom" column-count=5 color-list='["red", "green", "blue", "black", "white"]'></paper-swatch-picker>
+      <paper-swatch-picker class="custom" column-count="5" color-list='["#ff0000", "#00ff00", "#0000ff", "#000", "#fff"]'></paper-swatch-picker>
     </template>
   </test-fixture>
 
@@ -59,7 +59,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         // No color is selected.
         assert.equal(picker.color, undefined);
-        MockInteractions.tap(picker);
+        MockInteractions.tap(picker.$.iconButton);
 
         Polymer.Base.async(function() {
           // There are 18 default columns, and each column is 20px wide.
@@ -79,16 +79,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
         // No color is selected.
         assert.equal(picker.color, undefined);
-        picker.open();
+        MockInteractions.tap(picker.$.iconButton);
 
-        // The colors have been filled in. The first box is #ffebee.
-        var box = container.querySelector('.color');
-        MockInteractions.tap(box);
         Polymer.Base.async(function() {
-          assert.equal('#ffebee', picker.color);
-          assert.equal('ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
-          done();
-        }, 1);
+          // The colors have been filled in. The first box is #ffebee.
+          var box = container.querySelector('.color');
+          MockInteractions.tap(box);
+          Polymer.Base.async(function() {
+            assert.equal('#ffebee', picker.color);
+            assert.equal('ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
+            done();
+          }, 1);
+        });
       });
     });
 
@@ -111,15 +113,17 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         assert.equal(picker.color, '#ffcdd2');
         assert.equal('ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
 
-        picker.open();
+        MockInteractions.tap(picker.$.iconButton);
 
-        // Select a different color. The first box is #ffebee.
-        var box = container.querySelector('.color');
-        MockInteractions.tap(box);
         Polymer.Base.async(function() {
-          assert.equal('#ffebee', picker.color);
-          assert.equal('ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
-          done();
+          // Select a different color. The first box is #ffebee.
+          var box = container.querySelector('.color');
+          MockInteractions.tap(box);
+          Polymer.Base.async(function() {
+            assert.equal('#ffebee', picker.color);
+            assert.equal('ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
+            done();
+          }, 1);
         }, 1);
       });
     });
@@ -132,11 +136,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         container = picker.$.container;
       });
 
-      test('the picker shows the right colors', function() {
+      test('the picker shows the right colors', function(done) {
         Polymer.dom.flush(0);
         assert.equal(picker.colorList.length, 5);
 
-        picker.open();
+        MockInteractions.tap(picker.$.iconButton);
 
         Polymer.Base.async(function() {
           // There are 5 default columns, and each column is 10px wide.

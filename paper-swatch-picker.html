@@ -9,13 +9,12 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 -->
 
 <link rel="import" href="../polymer/polymer.html">
-<link rel="import" href="../iron-icon/iron-icon.html">
-<link rel="import" href="../iron-icons/editor-icons.html">
 <link rel="import" href="../iron-flex-layout/iron-flex-layout.html">
 <link rel="import" href="../paper-icon-button/paper-icon-button.html">
-<link rel="import" href="../paper-behaviors/paper-inky-focus-behavior.html">
 <link rel="import" href="../paper-listbox/paper-listbox.html">
+<link rel="import" href="../paper-item/paper-item.html">
 <link rel="import" href="../paper-menu-button/paper-menu-button.html">
+<link rel="import" href="./paper-swatch-picker-icon.html">
 
 <!--
 This is a simple color picker element that will allow you to choose one
@@ -67,41 +66,58 @@ Custom property | Description | Default
         padding: 0;
         margin: 0;
         cursor: pointer;
+        font-size: 0;
       }
 
       .color:hover, .color:focus {
         transform: scale(1.3, 1.3);
         outline: none;
+        z-index: 1;
       }
 
       paper-icon-button {
-        width: var(--paper-swatch-picker-icon-size, 24px);
-        height: var(--paper-swatch-picker-icon-size, 24px);
-        margin: 0;
-        padding: 0;
         @apply(--paper-swatch-picker-icon);
+      }
+
+      paper-item {
+        --paper-item: {
+          margin: 0;
+          padding: 0;
+          min-height: 0;
+        };
+
+        --paper-item-focused-before: {
+          opacity: 0;
+        };
       }
 
       paper-listbox {
         padding: 0;
         font-size: 0;
-        overflow: visible;
-        position: fixed;
         @apply(--layout-vertical);
         @apply(--layout-wrap);
+      }
+
+      paper-listbox.opened {
+        /* We need to set position:fixed so that the bottom left corner doesn't
+         * show scrollbars when hovered/keyboard selected. However, we
+         * need to do this *after* the dropdown has opened, so that we don't
+         * lose the animation */
+        position: fixed;
+        overflow: visible;
       }
     </style>
 
     <paper-menu-button id="menu">
-      <paper-icon-button tabindex="-1"
+      <paper-icon-button
           id="iconButton"
-          icon="editor:format-color-fill"
+          icon="swatch:format-color-fill"
           class="dropdown-trigger" alt="color picker"
-          noink>
+          noink$="[[noink]]">
       </paper-icon-button>
-      <paper-listbox class="dropdown-content" on-tap="_onColorTap" id="container">
+      <paper-listbox class="dropdown-content" id="container">
         <template is="dom-repeat" items="{{colorList}}">
-          <div class="color">{{item}}</div>
+          <paper-item class="color">{{item}}</paper-item>
         </template>
       </paper-listbox>
     </paper-menu-button>
@@ -116,12 +132,11 @@ Custom property | Description | Default
         'tabindex': 0
       },
 
-      behaviors: [
-        Polymer.PaperInkyFocusBehavior
-      ],
-
       listeners: {
-        'tap': '_onTap'
+        'paper-dropdown-open': '_onOpen',
+        'iron-overlay-opened': '_addOverflowClass',
+        'iron-overlay-closed': '_removeOverflowClass',
+        'iron-select': '_onColorTap'
       },
 
       /**
@@ -172,6 +187,12 @@ Custom property | Description | Default
         }
       },
 
+      created: function() {
+        // Note: we won't actually render these color boxes unless the menu is
+        // actually tapped.
+        this._renderedColors = false;
+      },
+
       attached: function() {
         // Fit the color boxes in columns. We first need to get the width of
         // a color box (which is customizable), and then change the box's
@@ -186,16 +207,9 @@ Custom property | Description | Default
         var rowCount = this.colorList.length / this.columnCount;
         this.$.container.style.height = rowCount * sizeOfAColorDiv + 'px';
         this.$.container.style.width = this.columnCount * sizeOfAColorDiv + 'px';
-
-        // Note: we won't actually render these color boxes unless the menu is
-        // actually tapped.
-        this._renderedColors = false;
-
       },
 
-      open: function() {
-        this.$.menu.open();
-
+      _onOpen: function() {
         // Fill in the colors if we haven't already.
         if (this._renderedColors)
           return;
@@ -207,24 +221,20 @@ Custom property | Description | Default
         this._renderedColors = true;
       },
 
-      close: function() {
-        this.$.menu.close();
+      _addOverflowClass: function() {
+        this.$.container.toggleClass('opened', true);
       },
 
-      _onTap: function(event) {
-        this.open();
+      _removeOverflowClass: function() {
+        this.$.container.toggleClass('opened', false);
       },
 
       _onColorTap: function(event) {
-        var color = event.target.style.backgroundColor;
+        var color = event.detail.item.style.backgroundColor;
 
         // If it's in rgb format, convert it first.
         this.color = '#' + (color.indexOf('rgb') === -1 ? color : this._rgbToHex(color));
-
         this.fire('color-picker-selected', {color: this.color});
-
-        // Don't let the tap event bubble up to the host.
-        event.stopImmediatePropagation();
       },
 
       _colorChanged: function() {
