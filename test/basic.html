@@ -55,7 +55,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
 
       test('clicking the button opens a rendered menu', function(done) {
-        Polymer.dom.flush(0);
+        Polymer.dom.flush();
 
         // No color is selected.
         assert.equal(picker.color, undefined);
@@ -69,13 +69,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           // The colors have been filled in. The first box is #ffebee.
           var box = container.querySelector('.color');
-          assert.equal('ffebee', picker._rgbToHex(box.style.backgroundColor));
+          assert.equal('#ffebee', picker._rgbToHex(box.style.color));
           done();
         }, 1);
       });
 
       test('clicking a color selects it', function(done) {
-        Polymer.dom.flush(0);
+        Polymer.dom.flush();
 
         // No color is selected.
         assert.equal(picker.color, undefined);
@@ -87,7 +87,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           MockInteractions.tap(box);
           Polymer.Base.async(function() {
             assert.equal('#ffebee', picker.color);
-            assert.equal('ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
+            assert.equal('#ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
             done();
           }, 1);
         });
@@ -103,15 +103,15 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
 
       test('the picker can have an initially selected color', function() {
-        Polymer.dom.flush(0);
+        Polymer.dom.flush();
         assert.equal(picker.color, '#ffcdd2');
-        assert.equal('ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
+        assert.equal('#ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
       });
 
       test('selecting a different color updates the button color', function(done) {
-        Polymer.dom.flush(0);
+        Polymer.dom.flush();
         assert.equal(picker.color, '#ffcdd2');
-        assert.equal('ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
+        assert.equal('#ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
 
         MockInteractions.tap(picker.$.iconButton);
 
@@ -121,7 +121,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           MockInteractions.tap(box);
           Polymer.Base.async(function() {
             assert.equal('#ffebee', picker.color);
-            assert.equal('ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
+            assert.equal('#ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
             done();
           }, 1);
         }, 1);
@@ -137,7 +137,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       });
 
       test('the picker shows the right colors', function(done) {
-        Polymer.dom.flush(0);
+        Polymer.dom.flush();
         assert.equal(picker.colorList.length, 5);
 
         MockInteractions.tap(picker.$.iconButton);
@@ -150,11 +150,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           // The colors have been filled in correctly
           var boxes = container.querySelectorAll('.color');
-          assert.equal('ff0000', picker._rgbToHex(boxes[0].style.backgroundColor));
-          assert.equal('00ff00', picker._rgbToHex(boxes[1].style.backgroundColor));
-          assert.equal('0000ff', picker._rgbToHex(boxes[2].style.backgroundColor));
-          assert.equal('000000', picker._rgbToHex(boxes[3].style.backgroundColor));
-          assert.equal('ffffff', picker._rgbToHex(boxes[4].style.backgroundColor));
+          assert.equal('#ff0000', picker._rgbToHex(boxes[0].style.color));
+          assert.equal('#00ff00', picker._rgbToHex(boxes[1].style.color));
+          assert.equal('#0000ff', picker._rgbToHex(boxes[2].style.color));
+          assert.equal('#000000', picker._rgbToHex(boxes[3].style.color));
+          assert.equal('#ffffff', picker._rgbToHex(boxes[4].style.color));
           done();
         }, 1);
       });
