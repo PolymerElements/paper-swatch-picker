@@ -11,9 +11,7 @@
     "color",
     "picker"
   ],
-  "main": [
-    "paper-swatch-picker.html"
-  ],
+  "main": "paper-swatch-picker.html",
   "ignore": [],
   "repository": {
     "type": "git",
@@ -21,7 +19,6 @@
   },
   "license": "http://polymer.github.io/LICENSE.txt",
   "homepage": "https://github.com/PolymerElements/paper-swatch-picker",
-  "ignore": [],
   "dependencies": {
     "iron-iconset-svg": "PolymerElements/iron-iconset-svg#^1.0.0",
     "iron-flex-layout": "PolymerElements/iron-flex-layout#^1.0.0",
