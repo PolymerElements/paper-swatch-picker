@@ -114,7 +114,7 @@ Custom property | Description | Default
       }
     </style>
 
-    <paper-menu-button id="menu">
+    <paper-menu-button id="menu" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
       <paper-icon-button
           id="iconButton"
           icon="swatch:format-color-fill"
@@ -181,6 +181,26 @@ Custom property | Description | Default
         columnCount: {
           type: Number,
           value: 18
+        },
+
+        /**
+         * The orientation against which to align the menu dropdown
+         * horizontally relative to the dropdown trigger.
+         */
+        horizontalAlign: {
+          type: String,
+          value: 'left',
+          reflectToAttribute: true
+        },
+
+        /**
+         * The orientation against which to align the menu dropdown
+         * vertically relative to the dropdown trigger.
+         */
+        verticalAlign: {
+          type: String,
+          value: 'top',
+          reflectToAttribute: true
         },
 
         /**
