@@ -116,10 +116,9 @@ Custom property | Description | Default
 
     <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
       <paper-button
-          id="iconButton"
           class="dropdown-trigger" alt="color picker"
           noink$="[[noink]]">
-          <iron-icon icon="{{icon}}"></iron-icon>
+          <iron-icon id="iconButton" icon="{{icon}}"></iron-icon>
           {{label}}
       </paper-button>
       <paper-listbox class="dropdown-content" id="container">
@@ -164,9 +163,10 @@ Custom property | Description | Default
          */
         icon: {
           type: String,
+          value: function() { return 'image:palette' },
           reflectToAttribute: true
         },
-        
+
         /**
          * The selected color, as hex (i.e. #ffffff).
          * value.
