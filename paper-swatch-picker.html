@@ -114,13 +114,13 @@ Custom property | Description | Default
       }
     </style>
 
-    <paper-menu-button id="menu" vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
-      <paper-icon-button
-          id="iconButton"
-          icon="swatch:format-color-fill"
+    <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
+      <paper-button
           class="dropdown-trigger" alt="color picker"
           noink$="[[noink]]">
-      </paper-icon-button>
+          <iron-icon id="iconButton" icon="{{icon}}"></iron-icon>
+          {{label}}
+      </paper-button>
       <paper-listbox class="dropdown-content" id="container">
         <template is="dom-repeat" items="{{colorList}}">
           <paper-item class="color">{{item}}</paper-item>
@@ -149,6 +149,24 @@ Custom property | Description | Default
        */
 
       properties: {
+
+        /**
+         * The label for the button.
+         */
+        label: {
+          type: String,
+          reflectToAttribute: true
+        },
+
+        /**
+         * The icon for the button.
+         */
+        icon: {
+          type: String,
+          value: function() { return 'image:palette' },
+          reflectToAttribute: true
+        },
+
         /**
          * The selected color, as hex (i.e. #ffffff).
          * value.
