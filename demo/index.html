@@ -22,11 +22,16 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     <link rel="import" href="../../iron-demo-helpers/demo-pages-shared-styles.html">
     <link rel="import" href="../paper-swatch-picker.html">
 
-    <style is="custom-style" include="demo-pages-shared-styles">
-      paper-swatch-picker {
-        margin: 0 10px;
-      }
-    </style>
+    <!-- Ensure Web Animations polyfill is loaded since neon-animation 2.0 doesn't import it -->
+    <link rel="import" href="../../neon-animation/web-animations.html">
+
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        paper-swatch-picker {
+          margin: 0 10px;
+        }
+      </style>
+    </custom-style>
   </head>
   <body unresolved>
     <div class="vertical-section-container centered">
@@ -50,12 +55,14 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       <h3>The picker can be styled using custom properties</h3>
       <demo-snippet class="centered-demo">
         <template>
-          <style is="custom-style">
-            paper-swatch-picker.fancy {
-              --paper-swatch-picker-color-size: 10px;
-              --paper-swatch-picker-icon-size: 40px;
-            }
-          </style>
+          <custom-style>
+            <style is="custom-style">
+              paper-swatch-picker.fancy {
+                --paper-swatch-picker-color-size: 10px;
+                --paper-swatch-picker-icon-size: 40px;
+              }
+            </style>
+          </custom-style>
           <paper-swatch-picker class="fancy"></paper-swatch-picker>
         </template>
       </demo-snippet>
