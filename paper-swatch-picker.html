@@ -118,10 +118,11 @@ Custom property | Description | Default
       <paper-icon-button
           id="iconButton"
           icon="swatch:format-color-fill"
-          class="dropdown-trigger" alt="color picker"
+          slot="dropdown-trigger" class="dropdown-trigger"
+          alt="color picker"
           noink$="[[noink]]">
       </paper-icon-button>
-      <paper-listbox class="dropdown-content" id="container">
+      <paper-listbox slot="dropdown-content" class="dropdown-content" id="container">
         <template is="dom-repeat" items="{{colorList}}">
           <paper-item class="color">{{item}}</paper-item>
         </template>
