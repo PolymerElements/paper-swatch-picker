@@ -33,7 +33,8 @@
     "iron-demo-helpers": "PolymerElements/iron-demo-helpers#2.0-preview",
     "iron-test-helpers": "PolymerElements/iron-test-helpers#2.0-preview",
     "web-component-tester": "Polymer/web-component-tester#^6.0.0-prerelease.6",
-    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1"
+    "webcomponentsjs": "webcomponents/webcomponentsjs#^1.0.0-rc.1",
+    "web-animations-js": "web-animations/web-animations-js#^2.2"
   },
   "variants": {
     "1.x": {
@@ -52,7 +53,8 @@
         "iron-test-helpers": "PolymerElements/iron-test-helpers#^1.0.0",
         "test-fixture": "PolymerElements/test-fixture#^1.0.0",
         "web-component-tester": "^4.0.0",
-        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0"
+        "webcomponentsjs": "webcomponents/webcomponentsjs#^0.7.0",
+        "web-animations-js": "web-animations/web-animations-js#^2.2"
       }
     }
   }
