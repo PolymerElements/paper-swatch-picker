@@ -260,7 +260,6 @@ Custom property | Description | Default
         var colorBoxes = this.$.container.querySelectorAll('.color');
         for (var i = 0; i < colorBoxes.length; i++) {
           colorBoxes[i].style.color = colorBoxes[i].innerHTML;
-          colorBoxes[i].innerHTML = '';
         }
         this._renderedColors = true;
       },
@@ -318,6 +317,7 @@ Custom property | Description | Default
         var rowCount = this.colorList.length / this.columnCount;
         this.$.container.style.height = rowCount * sizeOfAColorDiv + 'px';
         this.$.container.style.width = this.columnCount * sizeOfAColorDiv + 'px';
+        this._renderedColors = false;
       }
     });
   </script>
