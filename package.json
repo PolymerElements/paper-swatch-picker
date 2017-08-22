@@ -1,0 +1,32 @@
+{
+  "name": "@polymer/paper-swatch-picker",
+  "flat": true,
+  "version": "3.0.0-pre.1",
+  "description": "A color picker element using all the Material Design colours",
+  "contributors": [
+    "The Polymer Authors"
+  ],
+  "keywords": [
+    "web-components",
+    "polymer",
+    "color",
+    "picker"
+  ],
+  "main": "paper-swatch-picker.html",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/PolymerElements/paper-swatch-picker.git"
+  },
+  "license": "http://polymer.github.io/LICENSE.txt",
+  "homepage": "https://github.com/PolymerElements/paper-swatch-picker",
+  "dependencies": {
+    "@polymer/iron-flex-layout": "^3.0.0-pre.1",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.1",
+    "@polymer/paper-icon-button": "^3.0.0-pre.1",
+    "@polymer/paper-item": "^3.0.0-pre.1",
+    "@polymer/paper-listbox": "^3.0.0-pre.1",
+    "@polymer/paper-menu-button": "^3.0.0-pre.1",
+    "@polymer/polymer": "^3.0.0-pre.1"
+  },
+  "devDependencies": {}
+}
