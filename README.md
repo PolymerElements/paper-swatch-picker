@@ -13,6 +13,7 @@ thing! https://github.com/PolymerLabs/tedium/issues
 -->
 
 [![Build status](https://travis-ci.org/PolymerElements/paper-swatch-picker.svg?branch=master)](https://travis-ci.org/PolymerElements/paper-swatch-picker)
+
 _[Demo and API docs](https://elements.polymer-project.org/elements/paper-swatch-picker)_
 
 
