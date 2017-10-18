@@ -282,6 +282,7 @@ Custom property | Description | Default
 
       _colorChanged: function() {
         this.$.iconButton.style.color = this.color;
+        this.$.container.selected = this.colorList.indexOf(this.color);
       },
 
       _colorListChanged: function() {
