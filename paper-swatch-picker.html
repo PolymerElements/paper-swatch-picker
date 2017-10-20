@@ -304,9 +304,12 @@ Custom property | Description | Default
           sizeOfAColorDiv = sizeOfAColorDiv.replace('px', '');
         }
 
-        var rowCount = this.colorList.length / this.columnCount;
+        var rowCount = Math.ceil(this.colorList.length / this.columnCount);
+        // get empty columns due to vertical layout: 1 color and 2 columns or 12 colors and 5 columns
+        var emptyColumns = ((rowCount * this.columnCount) - this.colorList.length) / rowCount;
         this.$.container.style.height = rowCount * sizeOfAColorDiv + 'px';
-        this.$.container.style.width = this.columnCount * sizeOfAColorDiv + 'px';
+        this.$.container.style.width = (this.columnCount - emptyColumns) * sizeOfAColorDiv + 'px';
+        this.$.container.style['padding-right'] = emptyColumns * sizeOfAColorDiv + 'px';
         this._renderedColors = false;
       }
     });
