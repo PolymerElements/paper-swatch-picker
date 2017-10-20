@@ -54,7 +54,20 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
     </template>
   </test-fixture>
 
-  <script>
+  <script>     
+  
+    var _rgbToHex = function(rgb) {
+      // Split the rgb(r, g, b) string up.
+      var split = rgb.split('(')[1].split(')')[0].split(',');
+      if (split.length != 3)
+        return '';
+      // From https://gist.github.com/lrvick/2080648.
+      var bin = split[0] << 16 | split[1] << 8 | split[2];
+      return (function(h) {
+        return '#' + new Array(7 - h.length).join('0') + h;
+      })(bin.toString(16).toLowerCase());
+    }
+
     suite('basic', function() {
       var picker, container;
 
@@ -78,7 +91,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           // The colors have been filled in. The first box is #ffebee.
           var box = container.querySelector('.color');
-          assert.equal('#ffebee', picker._rgbToHex(box.style.color));
+          assert.equal('#ffebee', _rgbToHex(box.style.color));
           done();
         }, 1);
       });
@@ -96,11 +109,46 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           MockInteractions.tap(box);
           Polymer.Base.async(function() {
             assert.equal('#ffebee', picker.color);
-            assert.equal('#ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
+            assert.equal('#ffebee', _rgbToHex(picker.$.iconButton.style.color));
             done();
           }, 1);
         });
       });
+
+      test('setting color property change button color', function(done) {
+        Polymer.dom.flush();
+
+        // No color is selected.
+        assert.equal(picker.color, undefined);
+
+        Polymer.Base.async(function() {
+          // The colors have been filled in. The first box is #ffebee.
+          picker.color = '#ffcdd2'
+          Polymer.Base.async(function() {
+            assert.equal('#ffcdd2', _rgbToHex(picker.$.iconButton.style.color));
+            done();
+          }, 1);
+        });
+      });
+
+      test('setting color property change selected color', function(done) {
+        Polymer.dom.flush();
+
+        // No color is selected.
+        assert.equal(picker.color, undefined);
+
+        Polymer.Base.async(function() {
+          // The colors have been filled in. The first box is #ffebee.
+          picker.color = '#ffcdd2'
+          Polymer.Base.async(function() {
+            MockInteractions.tap(picker.$.iconButton);
+            var box = container.querySelector('.color.iron-selected');
+            assert.equal('#ffcdd2', _rgbToHex(box.style.color));
+            done();
+          }, 1);
+        });
+      });
+
     });
 
     suite('initial selection', function() {
@@ -114,13 +162,13 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       test('the picker can have an initially selected color', function() {
         Polymer.dom.flush();
         assert.equal(picker.color, '#ffcdd2');
-        assert.equal('#ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
+        assert.equal('#ffcdd2', _rgbToHex(picker.$.iconButton.style.color));
       });
 
       test('selecting a different color updates the button color', function(done) {
         Polymer.dom.flush();
         assert.equal(picker.color, '#ffcdd2');
-        assert.equal('#ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
+        assert.equal('#ffcdd2', _rgbToHex(picker.$.iconButton.style.color));
 
         MockInteractions.tap(picker.$.iconButton);
 
@@ -130,7 +178,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           MockInteractions.tap(box);
           Polymer.Base.async(function() {
             assert.equal('#ffebee', picker.color);
-            assert.equal('#ffebee', picker._rgbToHex(picker.$.iconButton.style.color));
+            assert.equal('#ffebee', _rgbToHex(picker.$.iconButton.style.color));
             done();
           }, 1);
         }, 1);
@@ -159,11 +207,11 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
 
           // The colors have been filled in correctly
           var boxes = container.querySelectorAll('.color');
-          assert.equal('#ff0000', picker._rgbToHex(boxes[0].style.color));
-          assert.equal('#00ff00', picker._rgbToHex(boxes[1].style.color));
-          assert.equal('#0000ff', picker._rgbToHex(boxes[2].style.color));
-          assert.equal('#000000', picker._rgbToHex(boxes[3].style.color));
-          assert.equal('#ffffff', picker._rgbToHex(boxes[4].style.color));
+          assert.equal('#ff0000', _rgbToHex(boxes[0].style.color));
+          assert.equal('#00ff00', _rgbToHex(boxes[1].style.color));
+          assert.equal('#0000ff', _rgbToHex(boxes[2].style.color));
+          assert.equal('#000000', _rgbToHex(boxes[3].style.color));
+          assert.equal('#ffffff', _rgbToHex(boxes[4].style.color));
           done();
         }, 1);
       });
@@ -230,7 +278,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
               // Since the old selected color is not in the new list,
               // it has been adjusted to the fallback color (first color: #ffcdd2)
               assert.equal('#ffcdd2', picker.color);
-              assert.equal('#ffcdd2', picker._rgbToHex(picker.$.iconButton.style.color));
+              assert.equal('#ffcdd2', _rgbToHex(picker.$.iconButton.style.color));
 
               MockInteractions.tap(picker.$.iconButton);
 
@@ -238,7 +286,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
                 // The colors have been filled in correctly
                 var boxes = container.querySelectorAll('.color');
                 picker.colorList.forEach(function(color, index) {
-                  assert.equal(color, picker._rgbToHex(boxes[index].style.color))
+                  assert.equal(color, _rgbToHex(boxes[index].style.color))
                 });
 
                 done();
