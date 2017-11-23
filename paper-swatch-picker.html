@@ -115,7 +115,7 @@ Custom property | Description | Default
     <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
       <paper-icon-button
           id="iconButton"
-          icon="swatch:format-color-fill"
+          icon="[[icon]]"
           slot="dropdown-trigger" class="dropdown-trigger"
           alt="color picker"
           noink$="[[noink]]">
@@ -209,6 +209,14 @@ Custom property | Description | Default
          */
         noink: {
           type: Boolean
+        },
+          
+        /**
+         * Override to set a custom icon instead of the default
+         */
+        icon: {
+          type: String,
+          value: 'swatch:format-color-fill'
         }
       },
 
