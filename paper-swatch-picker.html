@@ -121,8 +121,8 @@ Custom property | Description | Default
           noink$="[[noink]]">
       </paper-icon-button>
       <paper-listbox slot="dropdown-content" class="dropdown-content" id="container">
-        <template is="dom-repeat" items="{{colorList}}">
-          <paper-item class="color">{{item}}</paper-item>
+        <template is="dom-repeat" items="{{colorList}}" as="color">
+          <paper-item data-color$="[[color]]" class="color">{{color}}</paper-item>
         </template>
       </paper-listbox>
     </paper-menu-button>
@@ -272,16 +272,13 @@ Custom property | Description | Default
 
       _onColorTap: function(event) {
         var item = event.detail.item;
-        // The inner `span` element has the background color;
-        var color = item.style.color;
-
-        // If it's in rgb format, convert it first.
-        this.color = color.indexOf('rgb') === -1 ? color : this._rgbToHex(color);
+        this.color = item.dataset.color;;
         this.fire('color-picker-selected', {color: this.color});
       },
 
       _colorChanged: function() {
-        this.$.iconButton.style.color = this.color;
+        this.$.iconButton.style.color = this.color || 'black';
+        this.$.container.selected = this.colorList.indexOf(this.color);
       },
 
       _colorListChanged: function() {
@@ -296,23 +293,6 @@ Custom property | Description | Default
         this._updateSize();
       },
 
-      /**
-       * Takes an rgb(r, g, b) style string and converts it to a #ffffff hex value.
-       */
-      _rgbToHex: function(rgb) {
-        // Split the rgb(r, g, b) string up.
-        var split = rgb.split('(')[1].split(')')[0].split(',');
-
-        if (split.length != 3)
-          return '';
-
-        // From https://gist.github.com/lrvick/2080648.
-        var bin = split[0] << 16 | split[1] << 8 | split[2];
-        return (function(h) {
-          return '#' + new Array(7 - h.length).join('0') + h;
-        })(bin.toString(16).toLowerCase());
-      },
-
       _updateSize: function() {
         // Fit the color boxes in columns. We first need to get the width of
         // a color box (which is customizable), and then change the box's
@@ -324,9 +304,12 @@ Custom property | Description | Default
           sizeOfAColorDiv = sizeOfAColorDiv.replace('px', '');
         }
 
-        var rowCount = this.colorList.length / this.columnCount;
+        var rowCount = Math.ceil(this.colorList.length / this.columnCount);
+        // get empty columns due to vertical layout: 1 color and 2 columns or 12 colors and 5 columns
+        var emptyColumns = ((rowCount * this.columnCount) - this.colorList.length) / rowCount;
         this.$.container.style.height = rowCount * sizeOfAColorDiv + 'px';
-        this.$.container.style.width = this.columnCount * sizeOfAColorDiv + 'px';
+        this.$.container.style.width = (this.columnCount - emptyColumns) * sizeOfAColorDiv + 'px';
+        this.$.container.style['padding-right'] = emptyColumns * sizeOfAColorDiv + 'px';
         this._renderedColors = false;
       }
     });
