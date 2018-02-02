@@ -324,7 +324,7 @@ Custom property | Description | Default
           sizeOfAColorDiv = sizeOfAColorDiv.replace('px', '');
         }
 
-        var rowCount = this.colorList.length / this.columnCount;
+        var rowCount = Math.ceil(this.colorList.length / this.columnCount);
         this.$.container.style.height = rowCount * sizeOfAColorDiv + 'px';
         this.$.container.style.width = this.columnCount * sizeOfAColorDiv + 'px';
         this._renderedColors = false;
