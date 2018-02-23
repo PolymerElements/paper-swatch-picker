@@ -115,7 +115,7 @@ Custom property | Description | Default
     <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
       <paper-icon-button
           id="iconButton"
-          icon="swatch:format-color-fill"
+          icon="[[icon]]"
           slot="dropdown-trigger" class="dropdown-trigger"
           alt="color picker"
           noink$="[[noink]]">
@@ -201,6 +201,16 @@ Custom property | Description | Default
           type: String,
           value: 'top',
           reflectToAttribute: true
+        },
+
+        /**
+         * The name of the icon to use for the button used as a dropdown trigger.
+         * The name should be of the form: `iconset_name:icon_name`.
+         * You must manually import the icon/iconset you wish you use.
+         */
+        icon: {
+          type: String,
+          value: 'swatch:format-color-fill'
         },
 
         /**
