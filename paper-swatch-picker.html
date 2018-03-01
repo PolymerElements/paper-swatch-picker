@@ -287,16 +287,16 @@ Custom property | Description | Default
         this.fire('color-picker-selected', {color: this.color});
       },
 
-      _colorChanged: function(color) {
-        this.$.iconButton.style.color = color;
+      _colorChanged: function() {
+        this.$.iconButton.style.color = this.color;
       },
 
-      _colorListChanged: function(colorList) {
+      _colorListChanged: function() {
         // Fall back to the first color, if the new color list doesn't contain the selected color.
         // Bad news: the color could be either toLowerCase or uppercase so uhhh try both.
         if (this.color && this.color !== '' &&
-            colorList.indexOf(this.color) === -1 &&
-            colorList.indexOf(this.color.toLowerCase()) === -1) {
+            this.colorList.indexOf(this.color) === -1 &&
+            this.colorList.indexOf(this.color.toLowerCase()) === -1) {
           this.color = this.colorList[0];
         }
         this._updateSize();
