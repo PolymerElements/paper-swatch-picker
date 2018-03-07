@@ -58,6 +58,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var picker, container;
 
       setup(function() {
+        // Ensure focus is set to document.body
+        document.body.focus();
+
         picker = fixture('basic');
         container = picker.$.container;
         Polymer.dom.flush();  // This element has a dom-repeat.
@@ -102,6 +105,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var picker, container;
 
       setup(function() {
+        // Ensure focus is set to document.body
+        document.body.focus();
+
         picker = fixture('preselected');
         container = picker.$.container;
         Polymer.dom.flush();  // This element has a dom-repeat.
@@ -133,6 +139,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var picker, container;
 
       setup(function() {
+        // Ensure focus is set to document.body
+        document.body.focus();
+
         picker = fixture('custom');
         container = picker.$.container;
         Polymer.dom.flush();  // This element has a dom-repeat.
@@ -164,6 +173,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       var picker, container;
 
       setup(function () {
+        // Ensure focus is set to document.body
+        document.body.focus();
+
         picker = fixture('dynamic');
         container = picker.$.container;
         Polymer.dom.flush();  // This element has a dom-repeat.
