@@ -283,7 +283,7 @@ Custom property | Description | Default
         // uppercase so uhhh try both.
         if (this.color && this.color !== '' &&
             this.colorList.indexOf(this.color) === -1 &&
-            this.colorList.indexOf(this.color.toLowerCase()) === -1) {
+            this.colorList.indexOf(String(this.color).toLowerCase()) === -1) {
           this.color = this.colorList[0];
         }
         this._updateSize();
