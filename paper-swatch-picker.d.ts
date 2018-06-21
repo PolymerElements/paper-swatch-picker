@@ -97,7 +97,7 @@ interface PaperSwatchPickerElement extends Polymer.Element {
   /**
    * Returns the default Material Design colors.
    */
-  defaultColors(): string[]|null;
+  defaultColors(): string[];
   _onOpen(): void;
   _addOverflowClass(): void;
   _removeOverflowClass(): void;
