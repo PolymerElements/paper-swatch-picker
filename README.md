@@ -26,7 +26,6 @@ npm install --save @polymer/paper-swatch-picker
   </head>
   <body>
     <paper-swatch-picker></paper-swatch-picker>
-    <paper-swatch-picker color="{{selectedColor}}"></paper-swatch-picker>
     <paper-swatch-picker column-count=5 color-list='["#65a5f2", "#83be54", "#f0d551", "#e5943c", "#a96ddb"]'></paper-swatch-picker>
   </body>
 </html>

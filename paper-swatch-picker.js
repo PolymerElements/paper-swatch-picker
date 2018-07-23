@@ -44,7 +44,6 @@ Custom property | Description | Default
 ----------------|-------------|----------
 `--paper-swatch-picker-color-size` | The size of each of the color boxes |
 `20px`
-`--paper-swatch-picker-icon-size` | The size of the color picker icon | `24px`
 `--paper-swatch-picker-icon` | Mixin applied to the color picker icon | `{}`
 
 @element paper-swatch-picker
