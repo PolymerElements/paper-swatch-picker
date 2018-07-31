@@ -1,12 +1,24 @@
 /**
 @license
 Copyright (c) 2016 The Polymer Project Authors. All rights reserved.
-This code may only be used under the BSD style license found at http://polymer.github.io/LICENSE.txt
-The complete set of authors may be found at http://polymer.github.io/AUTHORS.txt
-The complete set of contributors may be found at http://polymer.github.io/CONTRIBUTORS.txt
-Code distributed by Google as part of the polymer project is also
-subject to an additional IP rights grant found at http://polymer.github.io/PATENTS.txt
+This code may only be used under the BSD style license found at
+http://polymer.github.io/LICENSE.txt The complete set of authors may be found at
+http://polymer.github.io/AUTHORS.txt The complete set of contributors may be
+found at http://polymer.github.io/CONTRIBUTORS.txt Code distributed by Google as
+part of the polymer project is also subject to an additional IP rights grant
+found at http://polymer.github.io/PATENTS.txt
 */
+import '@polymer/polymer/polymer-legacy.js';
+
+import '@polymer/iron-flex-layout/iron-flex-layout.js';
+import '@polymer/paper-icon-button/paper-icon-button.js';
+import '@polymer/paper-item/paper-item.js';
+import '@polymer/paper-listbox/paper-listbox.js';
+import '@polymer/paper-menu-button/paper-menu-button.js';
+import './paper-swatch-picker-icon.js';
+import {Polymer} from '@polymer/polymer/lib/legacy/polymer-fn.js';
+import {html} from '@polymer/polymer/lib/utils/html-tag.js';
+
 /**
 This is a simple color picker element that will allow you to choose one
 of the Material Design colors from a list of available swatches.
@@ -18,10 +30,12 @@ Example:
     <paper-swatch-picker color="{{selectedColor}}"></paper-swatch-picker>
 
 You can configure the color palette being used using the `colorList` array and
-the `columnCount` property, which specifies how many "generic" colours (i.e. columns
-in the picker) you want to display.
+the `columnCount` property, which specifies how many "generic" colours (i.e.
+columns in the picker) you want to display.
 
-    <paper-swatch-picker column-count=5 color-list='["#65a5f2", "#83be54", "#f0d551", "#e5943c", "#a96ddb"]'></paper-swatch-picker>
+    <paper-swatch-picker column-count=5
+        color-list='["#65a5f2", "#83be54","#f0d551", "#e5943c", "#a96ddb"]'>
+    </paper-swatch-picker>
 
 ### Styling
 
@@ -29,28 +43,12 @@ The following custom properties and mixins are available for styling:
 
 Custom property | Description | Default
 ----------------|-------------|----------
-`--paper-swatch-picker-color-size` | The size of each of the color boxes | `20px`
-`--paper-swatch-picker-icon-size` | The size of the color picker icon | `24px`
+`--paper-swatch-picker-color-size` | Size of each of the color boxes | `20px`
 `--paper-swatch-picker-icon` | Mixin applied to the color picker icon | `{}`
 
 @element paper-swatch-picker
 @demo demo/index.html
 */
-/*
-  FIXME(polymer-modulizer): the above comments were extracted
-  from HTML and may be out of place here. Review them and
-  then delete this comment!
-*/
-import '@polymer/polymer/polymer-legacy.js';
-
-import '@polymer/iron-flex-layout/iron-flex-layout.js';
-import '@polymer/paper-icon-button/paper-icon-button.js';
-import '@polymer/paper-item/paper-item.js';
-import '@polymer/paper-listbox/paper-listbox.js';
-import '@polymer/paper-menu-button/paper-menu-button.js';
-import './paper-swatch-picker-icon.js';
-import { Polymer } from '@polymer/polymer/lib/legacy/polymer-fn.js';
-import { html } from '@polymer/polymer/lib/utils/html-tag.js';
 Polymer({
   _template: html`
     <style>
