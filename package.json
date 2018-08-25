@@ -15,7 +15,7 @@
   "license": "BSD-3-Clause",
   "devDependencies": {
     "webmat": "^0.2.0",
-    "@polymer/iron-demo-helpers": "^3.0.0-pre.20",
+    "@polymer/iron-demo-helpers": "^3.0.0-pre.22",
     "wct-browser-legacy": "^1.0.1",
     "@webcomponents/webcomponentsjs": "^2.0.0",
     "web-animations-js": "^2.3.1",
@@ -23,19 +23,19 @@
   },
   "scripts": {
     "format": "webmat",
-    "generate-types": "gen-typescript-declarations --deleteExisting --outDir .",
+    "generate-types": "gen-typescript-declarations --deleteExisting --outDir . --verify",
     "prepack": "npm run generate-types"
   },
   "version": "3.0.0-pre.22",
   "main": "paper-swatch-picker.js",
   "author": "The Polymer Authors",
   "dependencies": {
-    "@polymer/iron-flex-layout": "^3.0.0-pre.20",
-    "@polymer/iron-iconset-svg": "^3.0.0-pre.20",
-    "@polymer/paper-icon-button": "^3.0.0-pre.20",
-    "@polymer/paper-item": "^3.0.0-pre.20",
-    "@polymer/paper-listbox": "^3.0.0-pre.20",
-    "@polymer/paper-menu-button": "^3.0.0-pre.20",
+    "@polymer/iron-flex-layout": "^3.0.0-pre.22",
+    "@polymer/iron-iconset-svg": "^3.0.0-pre.22",
+    "@polymer/paper-icon-button": "^3.0.0-pre.22",
+    "@polymer/paper-item": "^3.0.0-pre.22",
+    "@polymer/paper-listbox": "^3.0.0-pre.22",
+    "@polymer/paper-menu-button": "^3.0.0-pre.22",
     "@polymer/polymer": "^3.0.0"
   }
 }
