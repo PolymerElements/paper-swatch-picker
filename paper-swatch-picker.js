@@ -116,7 +116,7 @@ Polymer({
     </style>
 
     <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
-      <paper-icon-button id="iconButton" icon="[[icon]]" slot="dropdown-trigger" class="dropdown-trigger" alt="color picker" noink\$="[[noink]]">
+      <paper-icon-button id="iconButton" icon="[[icon]]" slot="dropdown-trigger" class="dropdown-trigger" alt="color picker" noink$="[[noink]]">
       </paper-icon-button>
       <paper-listbox slot="dropdown-content" class="dropdown-content" id="container">
         <template is="dom-repeat" items="[[colorList]]">
