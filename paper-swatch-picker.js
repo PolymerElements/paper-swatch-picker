@@ -200,7 +200,7 @@ Polymer({
   /**
    * Returns the default Material Design colors.
    *
-   * @return {Array[string]}
+   * @return {!Array<string>}
    */
   defaultColors: function() {
     return [
