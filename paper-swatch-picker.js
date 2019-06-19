@@ -50,6 +50,7 @@ Custom property | Description | Default
 @demo demo/index.html
 */
 Polymer({
+  /** @override */
   _template: html`
     <style>
       :host {
@@ -190,6 +191,7 @@ Polymer({
     noink: {type: Boolean}
   },
 
+  /** @override */
   attached: function() {
     // Note: we won't actually render these color boxes unless the menu is
     // actually tapped.
