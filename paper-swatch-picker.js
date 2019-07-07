@@ -50,7 +50,6 @@ Custom property | Description | Default
 @demo demo/index.html
 */
 Polymer({
-  /** @override */
   _template: html`
     <style>
       :host {
@@ -116,15 +115,10 @@ Polymer({
       }
     </style>
 
-    <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" opened="{{opened}}">
-      <paper-icon-button id="iconButton" icon="[[icon]]" slot="dropdown-trigger" class="dropdown-trigger" alt="color picker" noink$="[[noink]]">
+    <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
+      <paper-icon-button id="iconButton" icon="[[icon]]" slot="dropdown-trigger" class="dropdown-trigger" alt="color picker" noink\$="[[noink]]">
       </paper-icon-button>
       <paper-listbox slot="dropdown-content" class="dropdown-content" id="container">
-        <template is="dom-if" if="[[opened]]">
-          <template is="dom-repeat" items="[[colorList]]">
-            <paper-item class="color">[[item]]</paper-item>
-          </template>
-        </template>
       </paper-listbox>
     </paper-menu-button>
 `,
@@ -193,7 +187,6 @@ Polymer({
     noink: {type: Boolean}
   },
 
-  /** @override */
   attached: function() {
     // Note: we won't actually render these color boxes unless the menu is
     // actually tapped.
@@ -204,7 +197,7 @@ Polymer({
   /**
    * Returns the default Material Design colors.
    *
-   * @return {!Array<string>}
+   * @return {Array[string]}
    */
   defaultColors: function() {
     return [
@@ -242,17 +235,16 @@ Polymer({
   },
 
   _onOpen: function() {
-    setTimeout(()=>{
-      // Fill in the colors if we haven't already.
-      if (this._renderedColors)
-        return;
-
-      var colorBoxes = this.$.container.querySelectorAll('.color');
-      for (var i = 0; i < colorBoxes.length; i++) {
-        colorBoxes[i].style.color = colorBoxes[i].innerHTML;
-      }
-      this._renderedColors = true;
-    }, 0)
+    // Fill in the colors if we haven't already.
+    if (this._renderedColors)
+      return;
+    for (let color of this.colorList) {
+      let item = document.createElement('paper-item');
+      item.classList.add('color');
+      item.innerHTML = item.style.color = color;
+      this.$.container.appendChild(item);
+    }
+    this._renderedColors = true;
   },
 
   _addOverflowClass: function() {
