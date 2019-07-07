@@ -8,10 +8,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git://github.com/PolymerElements/paper-swatch-picker.git"
+    "url": "git@github.com:aletorrado/paper-swatch-picker.git"
   },
   "homepage": "https://github.com/PolymerElements/paper-swatch-picker",
-  "name": "@polymer/paper-swatch-picker",
+  "name": "@tadevel/paper-lazy-swatch-picker",
   "license": "BSD-3-Clause",
   "devDependencies": {
     "webmat": "^0.2.0",

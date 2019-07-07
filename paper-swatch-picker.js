@@ -116,12 +116,14 @@ Polymer({
       }
     </style>
 
-    <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]">
+    <paper-menu-button vertical-align="[[verticalAlign]]" horizontal-align="[[horizontalAlign]]" opened="{{opened}}">
       <paper-icon-button id="iconButton" icon="[[icon]]" slot="dropdown-trigger" class="dropdown-trigger" alt="color picker" noink$="[[noink]]">
       </paper-icon-button>
       <paper-listbox slot="dropdown-content" class="dropdown-content" id="container">
-        <template is="dom-repeat" items="[[colorList]]">
-          <paper-item class="color">[[item]]</paper-item>
+        <template is="dom-if" if="[[opened]]">
+          <template is="dom-repeat" items="[[colorList]]">
+            <paper-item class="color">[[item]]</paper-item>
+          </template>
         </template>
       </paper-listbox>
     </paper-menu-button>
@@ -240,15 +242,17 @@ Polymer({
   },
 
   _onOpen: function() {
-    // Fill in the colors if we haven't already.
-    if (this._renderedColors)
-      return;
+    setTimeout(()=>{
+      // Fill in the colors if we haven't already.
+      if (this._renderedColors)
+        return;
 
-    var colorBoxes = this.$.container.querySelectorAll('.color');
-    for (var i = 0; i < colorBoxes.length; i++) {
-      colorBoxes[i].style.color = colorBoxes[i].innerHTML;
-    }
-    this._renderedColors = true;
+      var colorBoxes = this.$.container.querySelectorAll('.color');
+      for (var i = 0; i < colorBoxes.length; i++) {
+        colorBoxes[i].style.color = colorBoxes[i].innerHTML;
+      }
+      this._renderedColors = true;
+    }, 0)
   },
 
   _addOverflowClass: function() {
