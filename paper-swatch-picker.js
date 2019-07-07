@@ -238,6 +238,7 @@ Polymer({
     // Fill in the colors if we haven't already.
     if (this._renderedColors)
       return;
+    this.$.container.innerHTML = '';
     for (let color of this.colorList) {
       let item = document.createElement('paper-item');
       item.classList.add('color');
